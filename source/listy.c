@@ -157,9 +157,6 @@ void* LISTY_get_data(LISTY_node_h node)
 
 void LISTY_delete_list(LISTY_list_h list)
 {
-    /*
-        Incomplete!
-    */
     LISTY_node_h node = list->_head;
     while(node)
     {
