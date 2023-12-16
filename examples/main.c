@@ -6,7 +6,8 @@ int main(void)
 {
     puts("hello, world");
 
-    LISTY_list_h list = LISTY_new_list(NULL, NULL, NULL, NULL);
+    LISTY_list_h list = LISTY_new_list(NULL, NULL, NULL, NULL, 
+        LISTY_ORDERING_ASCENDING);
 
     LISTY_delete_list(list);
 
