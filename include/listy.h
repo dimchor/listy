@@ -34,9 +34,9 @@ typedef struct LISTY_find_ret
     - a copy function, which copies the data to a new list node
     - a delete function, which deletes the data from an existing list node
     - a compare function, which compares the data between two list nodes
-      - returns -1 if lhs < rhs
+      - returns -1 (LISTY_ORDER_ASCENDING) if lhs < rhs
       - returns 0 if lhs == rhs
-      - returns 1 if lhs > rhs
+      - returns 1 (LISTY_ORDER_DESCENDING) if lhs > rhs
     - a get_key function, which is used to find and sort data
     
     It returns a pointer to the newly-created list or NULL, if there's an error. 
