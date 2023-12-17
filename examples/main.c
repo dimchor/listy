@@ -121,7 +121,13 @@ int main(void)
     client = new_client_record("c", 30);
     c = LISTY_emplace(list, &client);
 
+    printf("Order: %s\n", (LISTY_get_order(list) == LISTY_ORDER_ASCENDING 
+                               ? "Ascending" 
+                               : "Descending"));
     LISTY_reverse(list);
+    printf("Order: %s\n", (LISTY_get_order(list) == LISTY_ORDER_ASCENDING 
+                               ? "Ascending" 
+                               : "Descending"));
 
     LISTY_traverse(list, print_client_record, NULL, LISTY_FROM_HEAD);
     puts("");

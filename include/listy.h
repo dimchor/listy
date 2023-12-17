@@ -72,6 +72,8 @@ LISTY_node_h LISTY_get_prev(LISTY_node_h);
 
 size_t LISTY_get_size(LISTY_const_list_h);
 
+LISTY_order_t LISTY_get_order(LISTY_const_list_h);
+
 bool LISTY_is_empty(LISTY_const_list_h);
 
 void LISTY_clear(LISTY_list_h);

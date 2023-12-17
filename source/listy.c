@@ -244,6 +244,11 @@ size_t LISTY_get_size(LISTY_const_list_h list)
     return list->_size;
 }
 
+LISTY_order_t LISTY_get_order(LISTY_const_list_h list)
+{
+    return list->_order;
+}
+
 bool LISTY_is_empty(LISTY_const_list_h list)
 {
     return !list->_size;
