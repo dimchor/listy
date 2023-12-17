@@ -57,6 +57,11 @@ void delete_client_record(client_record_h client_handle)
     free(client_handle);
 }
 
+bool remove_odd(client_record_h client, void** other)
+{
+    return client->age % 2 > 0;
+}
+
 int main(void)
 {
     puts("hello, world");
@@ -107,10 +112,10 @@ int main(void)
 
     puts("\n");
 
-    client = new_client_record("a", 10);
+    client = new_client_record("a", 11);
     a = LISTY_emplace(list, &client);
 
-    client = new_client_record("d", 40);
+    client = new_client_record("d", 43);
     d = LISTY_emplace(list, &client);
 
     client = new_client_record("c", 30);
@@ -118,7 +123,8 @@ int main(void)
 
     LISTY_traverse(list, print_client_record, NULL, LISTY_FROM_HEAD);
     puts("");
-    LISTY_clear(list);
+    // LISTY_clear(list);
+    LISTY_remove_if(list, remove_odd, NULL);
     LISTY_traverse(list, print_client_record, NULL, LISTY_FROM_HEAD);
 
     LISTY_delete_list(list);

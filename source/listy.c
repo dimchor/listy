@@ -164,6 +164,25 @@ void* LISTY_remove(LISTY_list_h list, LISTY_node_h node)
     return data;
 }
 
+void LISTY_remove_if(LISTY_list_h list, bool (*func)(void*, void**), 
+    void** other)
+{
+    LISTY_node_h node = list->_head;
+    while(node)
+    {
+        if (func(node->_data, other))
+        {
+            LISTY_node_h tmp = node->_next;
+            list->_del(LISTY_remove(list, node));
+            node = tmp;
+        }
+        else
+        {
+            node = node->_next;
+        }
+    }
+}
+
 void LISTY_traverse(LISTY_list_h list, bool (*func)(void*, void**), 
     void** other, LISTY_iter_t iter)
 {
