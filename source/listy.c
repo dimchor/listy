@@ -24,7 +24,7 @@ typedef struct LISTY_list
 
 LISTY_list_h LISTY_new_list(void* (*copy)(void const*), void (*del)(void*), 
     int (*cmp)(void const*, void const*), void const* (*get_key)(void const*),
-    LISTY_order_t ordering)
+    LISTY_order_t order)
 {
     LISTY_list_h list = malloc(sizeof(LISTY_list_t));
     if (!list)
@@ -35,7 +35,7 @@ LISTY_list_h LISTY_new_list(void* (*copy)(void const*), void (*del)(void*),
     list->_head = NULL;
     list->_tail = NULL;
     list->_size = 0;
-    list->_order = ordering;
+    list->_order = order;
 
     list->_copy = copy;
     list->_del = del;
