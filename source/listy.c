@@ -136,6 +136,34 @@ LISTY_node_h LISTY_emplace(LISTY_list_h list, void** data)
     return LISTY_add_node(list, node, ret.prev);
 }
 
+void* LISTY_remove(LISTY_list_h list, LISTY_node_h node)
+{
+    if (node->_next)
+    {
+        node->_next->_prev = node->_prev;
+    }
+    else
+    {
+        list->_tail = node->_prev;
+    }
+
+    if (node->_prev)
+    {
+        node->_prev->_next = node->_next;
+    }
+    else
+    {
+        list->_head = node->_next;
+    }
+
+    void* data = node->_data;
+
+    free(node);
+    --(list->_size);
+
+    return data;
+}
+
 void LISTY_traverse(LISTY_const_list_h list, 
     void (*func)(void*, void**), void** other, LISTY_iter_t iter)
 {

@@ -66,20 +66,30 @@ int main(void)
         LISTY_ORDER_ASCENDING);
 
     client_record_h client = new_client_record("b", 20);
-    LISTY_insert(list, client);
+    LISTY_node_h b = LISTY_insert(list, client);
     delete_client_record(client);
 
     client = new_client_record("a", 10);
-    LISTY_emplace(list, &client);
+    LISTY_node_h a = LISTY_emplace(list, &client);
     // do not delete anything this time
 
     client = new_client_record("d", 40);
-    LISTY_emplace(list, &client);
+    LISTY_node_h d = LISTY_emplace(list, &client);
 
     client = new_client_record("c", 30);
-    LISTY_emplace(list, &client);
+    LISTY_node_h c = LISTY_emplace(list, &client);
 
-    LISTY_traverse(list, print_client_record, NULL, LISTY_FROM_HEAD);
+    delete_client_record(LISTY_remove(list, c));
+    LISTY_traverse(list, print_client_record, NULL, LISTY_FROM_TAIL);
+
+    delete_client_record(LISTY_remove(list, d));
+    LISTY_traverse(list, print_client_record, NULL, LISTY_FROM_TAIL);
+
+    delete_client_record(LISTY_remove(list, a));
+    LISTY_traverse(list, print_client_record, NULL, LISTY_FROM_TAIL);
+
+    delete_client_record(LISTY_remove(list, b));
+    LISTY_traverse(list, print_client_record, NULL, LISTY_FROM_TAIL);
 
     LISTY_delete_list(list);
 
