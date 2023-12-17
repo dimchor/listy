@@ -79,6 +79,15 @@ int main(void)
     client = new_client_record("c", 30);
     LISTY_node_h c = LISTY_emplace(list, &client);
 
+    print_client_record(LISTY_get_data(LISTY_get_head(list)), NULL);
+    print_client_record(LISTY_get_data(LISTY_get_tail(list)), NULL);
+    print_client_record(LISTY_get_data(LISTY_get_prev(b)), NULL);
+    print_client_record(LISTY_get_data(LISTY_get_next(b)), NULL);
+    printf("%d, %s\n", LISTY_get_size(list), (LISTY_is_empty(list) 
+                                                  ? "true" 
+                                                  : "false"));
+
+
     delete_client_record(LISTY_remove(list, c));
     LISTY_traverse(list, print_client_record, NULL, LISTY_FROM_TAIL);
 
@@ -90,6 +99,10 @@ int main(void)
 
     delete_client_record(LISTY_remove(list, b));
     LISTY_traverse(list, print_client_record, NULL, LISTY_FROM_TAIL);
+
+    printf("%d, %s\n", LISTY_get_size(list), (LISTY_is_empty(list) 
+                                                  ? "true" 
+                                                  : "false"));
 
     LISTY_delete_list(list);
 

@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 typedef struct LISTY_node* LISTY_node_h;
 typedef struct LISTY_node const* LISTY_const_node_h;
@@ -55,6 +56,18 @@ void* LISTY_remove(LISTY_list_h, LISTY_node_h);
 void LISTY_traverse(LISTY_const_list_h, void (*)(void*, void**), 
     void**, LISTY_iter_t);
 
-void* LISTY_get_data(LISTY_node_h);
+void* LISTY_get_data(LISTY_const_node_h);
+
+LISTY_node_h LISTY_get_head(LISTY_const_list_h);
+
+LISTY_node_h LISTY_get_tail(LISTY_const_list_h);
+
+LISTY_node_h LISTY_get_next(LISTY_const_node_h);
+
+LISTY_node_h LISTY_get_prev(LISTY_const_node_h);
+
+size_t LISTY_get_size(LISTY_const_list_h);
+
+bool LISTY_is_empty(LISTY_const_list_h);
 
 void LISTY_delete_list(LISTY_list_h);

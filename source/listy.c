@@ -178,9 +178,39 @@ void LISTY_traverse(LISTY_const_list_h list,
 
 }
 
-void* LISTY_get_data(LISTY_node_h node)
+void* LISTY_get_data(LISTY_const_node_h node)
 {
     return node->_data;
+}
+
+LISTY_node_h LISTY_get_head(LISTY_const_list_h list)
+{
+    return list->_head;
+}
+
+LISTY_node_h LISTY_get_tail(LISTY_const_list_h list)
+{
+    return list->_tail;
+}
+
+LISTY_node_h LISTY_get_next(LISTY_const_node_h node)
+{
+    return node->_next;
+}
+
+LISTY_node_h LISTY_get_prev(LISTY_const_node_h node)
+{
+    return node->_prev;
+}
+
+size_t LISTY_get_size(LISTY_const_list_h list)
+{
+    return list->_size;
+}
+
+bool LISTY_is_empty(LISTY_const_list_h list)
+{
+    return !list->_size;
 }
 
 void LISTY_delete_list(LISTY_list_h list)
