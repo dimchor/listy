@@ -45,7 +45,7 @@ LISTY_list_h LISTY_new_list(void* (*copy)(void const*), void (*del)(void*),
     return list;
 }
 
-LISTY_find_ret_t LISTY_find(LISTY_const_list_h list, void const* key)
+LISTY_find_ret_t LISTY_find(LISTY_list_h list, void const* key)
 {
     LISTY_find_ret_t ret;
     ret.target = NULL;
@@ -164,10 +164,10 @@ void* LISTY_remove(LISTY_list_h list, LISTY_node_h node)
     return data;
 }
 
-void LISTY_traverse(LISTY_const_list_h list, bool (*func)(void*, void**), 
+void LISTY_traverse(LISTY_list_h list, bool (*func)(void*, void**), 
     void** other, LISTY_iter_t iter)
 {
-    LISTY_const_node_h node = (iter == LISTY_FROM_HEAD 
+    LISTY_node_h node = (iter == LISTY_FROM_HEAD 
                                    ? list->_head 
                                    : list->_tail);
     while (node && func(node->_data, other))
@@ -177,27 +177,27 @@ void LISTY_traverse(LISTY_const_list_h list, bool (*func)(void*, void**),
 
 }
 
-void* LISTY_get_data(LISTY_const_node_h node)
+void* LISTY_get_data(LISTY_node_h node)
 {
     return node->_data;
 }
 
-LISTY_node_h LISTY_get_head(LISTY_const_list_h list)
+LISTY_node_h LISTY_get_head(LISTY_list_h list)
 {
     return list->_head;
 }
 
-LISTY_node_h LISTY_get_tail(LISTY_const_list_h list)
+LISTY_node_h LISTY_get_tail(LISTY_list_h list)
 {
     return list->_tail;
 }
 
-LISTY_node_h LISTY_get_next(LISTY_const_node_h node)
+LISTY_node_h LISTY_get_next(LISTY_node_h node)
 {
     return node->_next;
 }
 
-LISTY_node_h LISTY_get_prev(LISTY_const_node_h node)
+LISTY_node_h LISTY_get_prev(LISTY_node_h node)
 {
     return node->_prev;
 }
@@ -212,13 +212,13 @@ bool LISTY_is_empty(LISTY_const_list_h list)
     return !list->_size;
 }
 
-void LISTY_remove_en_masse(LISTY_list_h list)
+void LISTY_erase_all_nodes(LISTY_list_h list)
 {
     LISTY_node_h node = list->_head;
     while(node)
     {
         LISTY_node_h tmp = node->_next;
-        free(node->_data);
+        list->_del(node->_data);
         free(node);
         node = tmp;
     }
@@ -226,13 +226,13 @@ void LISTY_remove_en_masse(LISTY_list_h list)
 
 void LISTY_clear(LISTY_list_h list)
 {
-    LISTY_remove_en_masse(list);
+    LISTY_erase_all_nodes(list);
     list->_head = NULL;
     list->_tail = NULL;
 }
 
 void LISTY_delete_list(LISTY_list_h list)
 {
-    LISTY_remove_en_masse(list);
+    LISTY_erase_all_nodes(list);
     free(list);
 }
