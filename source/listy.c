@@ -186,9 +186,7 @@ void LISTY_remove_if(LISTY_list_h list, bool (*func)(void*, void**),
 void LISTY_traverse(LISTY_list_h list, bool (*func)(void*, void**), 
     void** other, LISTY_iter_t iter)
 {
-    LISTY_node_h node = (iter == LISTY_FROM_HEAD 
-                                   ? list->_head 
-                                   : list->_tail);
+    LISTY_node_h node = (iter == LISTY_FROM_HEAD ? list->_head : list->_tail);
     while (node && func(node->_data, other))
     {
         node = (iter == LISTY_FROM_HEAD ? node->_next : node->_prev);
