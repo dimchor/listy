@@ -53,7 +53,7 @@ LISTY_node_h LISTY_emplace(LISTY_list_h, void**);
 
 void* LISTY_remove(LISTY_list_h, LISTY_node_h);
 
-void LISTY_traverse(LISTY_const_list_h, void (*)(void*, void**), 
+void LISTY_traverse(LISTY_const_list_h, bool (*)(void*, void**), 
     void**, LISTY_iter_t);
 
 void* LISTY_get_data(LISTY_const_node_h);

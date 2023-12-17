@@ -164,15 +164,14 @@ void* LISTY_remove(LISTY_list_h list, LISTY_node_h node)
     return data;
 }
 
-void LISTY_traverse(LISTY_const_list_h list, 
-    void (*func)(void*, void**), void** other, LISTY_iter_t iter)
+void LISTY_traverse(LISTY_const_list_h list, bool (*func)(void*, void**), 
+    void** other, LISTY_iter_t iter)
 {
     LISTY_const_node_h node = (iter == LISTY_FROM_HEAD 
                                    ? list->_head 
                                    : list->_tail);
-    while (node)
+    while (node && func(node->_data, other))
     {
-        func(node->_data, other);
         node = (iter == LISTY_FROM_HEAD ? node->_next : node->_prev);
     }
 

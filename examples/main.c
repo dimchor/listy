@@ -45,10 +45,11 @@ char const* get_key_client_record(client_const_record_h client_handle)
     return client_handle->full_name;
 }
 
-void print_client_record(client_record_h client_handle, void** other)
+bool print_client_record(client_record_h client_handle, void** other)
 {
     printf("full name: %s, age: %u\n", client_handle->full_name, 
         +client_handle->age);
+    return true;
 }
 
 void delete_client_record(client_record_h client_handle)
