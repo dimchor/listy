@@ -212,7 +212,7 @@ bool LISTY_is_empty(LISTY_const_list_h list)
     return !list->_size;
 }
 
-void LISTY_delete_list(LISTY_list_h list)
+void LISTY_remove_en_masse(LISTY_list_h list)
 {
     LISTY_node_h node = list->_head;
     while(node)
@@ -222,6 +222,17 @@ void LISTY_delete_list(LISTY_list_h list)
         free(node);
         node = tmp;
     }
+}
 
+void LISTY_clear(LISTY_list_h list)
+{
+    LISTY_remove_en_masse(list);
+    list->_head = NULL;
+    list->_tail = NULL;
+}
+
+void LISTY_delete_list(LISTY_list_h list)
+{
+    LISTY_remove_en_masse(list);
     free(list);
 }

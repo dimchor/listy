@@ -105,6 +105,22 @@ int main(void)
                                                   ? "true" 
                                                   : "false"));
 
+    puts("\n");
+
+    client = new_client_record("a", 10);
+    a = LISTY_emplace(list, &client);
+
+    client = new_client_record("d", 40);
+    d = LISTY_emplace(list, &client);
+
+    client = new_client_record("c", 30);
+    c = LISTY_emplace(list, &client);
+
+    LISTY_traverse(list, print_client_record, NULL, LISTY_FROM_HEAD);
+    puts("");
+    LISTY_clear(list);
+    LISTY_traverse(list, print_client_record, NULL, LISTY_FROM_HEAD);
+
     LISTY_delete_list(list);
 
     return 0;
