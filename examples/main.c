@@ -121,6 +121,8 @@ int main(void)
     client = new_client_record("c", 30);
     c = LISTY_emplace(list, &client);
 
+    LISTY_reverse(list);
+
     LISTY_traverse(list, print_client_record, NULL, LISTY_FROM_HEAD);
     puts("");
     // LISTY_clear(list);

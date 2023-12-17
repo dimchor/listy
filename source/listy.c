@@ -194,6 +194,26 @@ void LISTY_traverse(LISTY_list_h list, bool (*func)(void*, void**),
 
 }
 
+void LISTY_reverse(LISTY_list_h list)
+{
+    LISTY_node_h node = list->_head;
+    while (node)
+    {
+        LISTY_node_h tmp = node->_next;
+        node->_next = node->_prev;
+        node->_prev = tmp;
+        node = tmp;
+    }
+
+    LISTY_node_h tmp = list->_head;
+    list->_head = list->_tail;
+    list->_tail = tmp;
+
+    list->_order = (list->_order == LISTY_ORDER_ASCENDING 
+                        ? LISTY_ORDER_DESCENDING 
+                        : LISTY_ORDER_ASCENDING);
+}
+
 void* LISTY_get_data(LISTY_node_h node)
 {
     return node->_data;
